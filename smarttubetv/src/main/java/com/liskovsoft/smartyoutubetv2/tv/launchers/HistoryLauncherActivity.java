@@ -5,6 +5,10 @@ import com.liskovsoft.mediaserviceinterfaces.data.MediaGroup;
 import com.liskovsoft.smartyoutubetv2.common.app.presenters.BrowsePresenter;
 import com.liskovsoft.smartyoutubetv2.common.misc.MotherActivity;
 
+/**
+ * The History launcher activity class.
+ *
+ */
 public class HistoryLauncherActivity extends MotherActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

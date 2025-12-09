@@ -4,6 +4,10 @@ import android.os.Bundle;
 import com.liskovsoft.smartyoutubetv2.common.app.presenters.SearchPresenter;
 import com.liskovsoft.smartyoutubetv2.common.misc.MotherActivity;
 
+/**
+ * The Search launcher activity class.
+ *
+ */
 public class SearchLauncherActivity extends MotherActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

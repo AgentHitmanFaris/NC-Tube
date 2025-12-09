@@ -12,6 +12,10 @@ import com.liskovsoft.smartyoutubetv2.common.app.models.data.VideoGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Video group object adapter class.
+ *
+ */
 public class VideoGroupObjectAdapter extends ObjectAdapter {
     private static final WeakHashSet<VideoGroupObjectAdapter> sAdapterRegistry = new WeakHashSet<>();
     private final List<Video> mVideoItems = new ArrayList<>();
@@ -20,22 +24,44 @@ public class VideoGroupObjectAdapter extends ObjectAdapter {
     private static final int TYPE_REMOVE = 1;
     private static final int TYPE_SYNC = 2;
 
+    /**
+     * Video group object adapter.
+     *
+     * @param videoGroup The Video group.
+     * @param presenter The Presenter.
+     */
     public VideoGroupObjectAdapter(VideoGroup videoGroup, Presenter presenter) {
         super(presenter);
 
         initData(videoGroup);
     }
 
+    /**
+     * Video group object adapter.
+     *
+     * @param videoGroup The Video group.
+     * @param presenter The Presenter.
+     */
     public VideoGroupObjectAdapter(VideoGroup videoGroup, PresenterSelector presenter) {
         super(presenter);
 
         initData(videoGroup);
     }
 
+    /**
+     * Video group object adapter.
+     *
+     * @param presenter The Presenter.
+     */
     public VideoGroupObjectAdapter(Presenter presenter) {
         this(null, presenter);
     }
 
+    /**
+     * Video group object adapter.
+     *
+     * @param presenter The Presenter.
+     */
     public VideoGroupObjectAdapter(PresenterSelector presenter) {
         this(null, presenter);
     }
@@ -48,11 +74,22 @@ public class VideoGroupObjectAdapter extends ObjectAdapter {
         }
     }
 
+    /**
+     * Size.
+     *
+     * @return The integer value.
+     */
     @Override
     public int size() {
         return mVideoItems.size();
     }
 
+    /**
+     * Gets .
+     *
+     * @param index The Index.
+     * @return The Object.
+     */
     @Override
     public Object get(int index) {
         if (index < 0 || index >= mVideoItems.size()) {
@@ -62,14 +99,29 @@ public class VideoGroupObjectAdapter extends ObjectAdapter {
         return mVideoItems.get(index);
     }
 
+    /**
+     * Gets All.
+     *
+     * @return A list of Get all.
+     */
     public List<Video> getAll() {
         return mVideoItems;
     }
 
+    /**
+     * Gets All groups.
+     *
+     * @return A list of Get all groups.
+     */
     public List<VideoGroup> getAllGroups() {
         return mVideoGroups;
     }
 
+    /**
+     * Add.
+     *
+     * @param group The Group.
+     */
     public void add(VideoGroup group) {
         if (group == null || group.getVideos() == null) {
             return;
@@ -84,6 +136,11 @@ public class VideoGroupObjectAdapter extends ObjectAdapter {
         notifyOtherAdapters(group, TYPE_ADD);
     }
 
+    /**
+     * Add.
+     *
+     * @param videos The Videos.
+     */
     public void add(List<Video> videos) {
         if (videos == null || videos.isEmpty()) {
             return;
@@ -173,6 +230,11 @@ public class VideoGroupObjectAdapter extends ObjectAdapter {
         }
     }
 
+    /**
+     * Remove.
+     *
+     * @param group The Group.
+     */
     public void remove(VideoGroup group) {
         for (Video video : group.getVideos()) {
             while (true) { // remove all occurrences of the same element (if present)
@@ -190,6 +252,11 @@ public class VideoGroupObjectAdapter extends ObjectAdapter {
         notifyOtherAdapters(group, TYPE_REMOVE);
     }
 
+    /**
+     * Remove author.
+     *
+     * @param group The Group.
+     */
     public void removeAuthor(VideoGroup group) {
         String author = group.getVideos().get(0).getAuthor(); // assume same author
         List<Video> result = Helpers.filter(mVideoItems, video -> Helpers.equals(author, video.getAuthor()));
@@ -198,6 +265,11 @@ public class VideoGroupObjectAdapter extends ObjectAdapter {
         }
     }
 
+    /**
+     * Sync.
+     *
+     * @param group The Group.
+     */
     public void sync(VideoGroup group) {
         for (Video video : group.getVideos()) {
             // Search for multiple occurrences (e.g. History section)
@@ -213,6 +285,11 @@ public class VideoGroupObjectAdapter extends ObjectAdapter {
         notifyOtherAdapters(group, TYPE_SYNC);
     }
 
+    /**
+     * Checks if Empty.
+     *
+     * @return True if is empty, false otherwise.
+     */
     public boolean isEmpty() {
         return mVideoItems.isEmpty();
     }

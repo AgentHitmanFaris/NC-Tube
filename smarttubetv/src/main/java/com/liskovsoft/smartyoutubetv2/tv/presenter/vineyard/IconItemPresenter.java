@@ -8,21 +8,41 @@ import androidx.leanback.widget.Presenter;
 import com.liskovsoft.smartyoutubetv2.common.app.models.search.vineyard.Option;
 import com.liskovsoft.smartyoutubetv2.tv.ui.widgets.vineyard.IconCardView;
 
+/**
+ * The Icon item presenter class.
+ *
+ */
 public class IconItemPresenter extends Presenter {
     
     private static int GRID_ITEM_WIDTH = 350;
     private static int GRID_ITEM_HEIGHT = 400;
 
+    /**
+     * Icon item presenter.
+     *
+     */
     public IconItemPresenter() {
 
     }
 
+    /**
+     * On create view holder.
+     *
+     * @param parent The Parent.
+     * @return The View holder.
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent) {
         IconCardView iconCardView = new IconCardView(parent.getContext());
         return new ViewHolder(iconCardView);
     }
 
+    /**
+     * On bind view holder.
+     *
+     * @param viewHolder The View holder.
+     * @param item The Item.
+     */
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, Object item) {
         if (item instanceof Option) {
@@ -37,6 +57,11 @@ public class IconItemPresenter extends Presenter {
         }
     }
 
+    /**
+     * On unbind view holder.
+     *
+     * @param viewHolder The View holder.
+     */
     @Override
     public void onUnbindViewHolder(ViewHolder viewHolder) { }
 }

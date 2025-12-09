@@ -23,6 +23,10 @@ import com.liskovsoft.smartyoutubetv2.tv.util.ViewUtil;
 
 import java.util.List;
 
+/**
+ * The Sign in fragment class.
+ *
+ */
 public class SignInFragment extends GuidedStepSupportFragment implements SignInView {
     private static final String TAG = SignInFragment.class.getSimpleName();
     private static final int CONTINUE = 2;
@@ -30,6 +34,11 @@ public class SignInFragment extends GuidedStepSupportFragment implements SignInV
     private SignInPresenter mSignInPresenter;
     private String mFullSignInUrl;
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +47,11 @@ public class SignInFragment extends GuidedStepSupportFragment implements SignInV
         mSignInPresenter.setView(this);
     }
 
+    /**
+     * On activity created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -45,12 +59,22 @@ public class SignInFragment extends GuidedStepSupportFragment implements SignInV
         mSignInPresenter.onViewInitialized();
     }
 
+    /**
+     * On destroy.
+     *
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
         mSignInPresenter.onViewDestroyed();
     }
 
+    /**
+     * Show code.
+     *
+     * @param userCode The User code.
+     * @param signInUrl The Sign in url.
+     */
     @Override
     public void showCode(String userCode, String signInUrl) {
         setTitle(userCode, signInUrl);
@@ -81,6 +105,10 @@ public class SignInFragment extends GuidedStepSupportFragment implements SignInV
         getGuidanceStylist().getDescriptionView().setText(coloredDescription);
     }
 
+    /**
+     * Close.
+     *
+     */
     @Override
     public void close() {
         if (getActivity() != null) {
@@ -88,6 +116,12 @@ public class SignInFragment extends GuidedStepSupportFragment implements SignInV
         }
     }
 
+    /**
+     * On create guidance.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     * @return The Guidance stylist. guidance.
+     */
     @Override
     @NonNull
     public GuidanceStylist.Guidance onCreateGuidance(@NonNull Bundle savedInstanceState) {
@@ -96,6 +130,12 @@ public class SignInFragment extends GuidedStepSupportFragment implements SignInV
         return new GuidanceStylist.Guidance(title, description, "", ContextCompat.getDrawable(getContext(), R.drawable.activate_account_qrcode));
     }
 
+    /**
+     * On create actions.
+     *
+     * @param actions The Actions.
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onCreateActions(@NonNull List<GuidedAction> actions, Bundle savedInstanceState) {
         GuidedAction login = new GuidedAction.Builder()
@@ -110,6 +150,11 @@ public class SignInFragment extends GuidedStepSupportFragment implements SignInV
         actions.add(openBrowser);
     }
 
+    /**
+     * On guided action clicked.
+     *
+     * @param action The Action.
+     */
     @Override
     public void onGuidedActionClicked(GuidedAction action) {
         if (action.getId() == CONTINUE) {
@@ -122,12 +167,31 @@ public class SignInFragment extends GuidedStepSupportFragment implements SignInV
     }
 
     private final RequestListener<Drawable> mErrorListener = new RequestListener<Drawable>() {
+        /**
+         * On load failed.
+         *
+         * @param e The E.
+         * @param model The Model.
+         * @param target The Target.
+         * @param isFirstResource The Is first resource.
+         * @return True if on load failed, false otherwise.
+         */
         @Override
         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
             Log.e(TAG, "Glide load failed: " + e);
             return false;
         }
 
+        /**
+         * On resource ready.
+         *
+         * @param resource The Resource.
+         * @param model The Model.
+         * @param target The Target.
+         * @param dataSource The Data source.
+         * @param isFirstResource The Is first resource.
+         * @return True if on resource ready, false otherwise.
+         */
         @Override
         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
             return false;

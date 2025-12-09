@@ -24,6 +24,10 @@ import com.liskovsoft.smartyoutubetv2.tv.presenter.base.LongClickPresenter;
 import com.liskovsoft.smartyoutubetv2.tv.ui.browse.video.GridFragmentHelper;
 import com.liskovsoft.smartyoutubetv2.tv.util.ViewUtil;
 
+/**
+ * The Channel card presenter class.
+ *
+ */
 public class ChannelCardPresenter extends LongClickPresenter {
     private static final String TAG = VideoCardPresenter.class.getSimpleName();
     private int mDefaultBackgroundColor;
@@ -34,6 +38,12 @@ public class ChannelCardPresenter extends LongClickPresenter {
     private int mWidth;
     private int mHeight;
 
+    /**
+     * On create view holder.
+     *
+     * @param parent The Parent.
+     * @return The View holder.
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent) {
         Context context = parent.getContext();
@@ -76,6 +86,12 @@ public class ChannelCardPresenter extends LongClickPresenter {
         return new ViewHolder(container);
     }
 
+    /**
+     * On bind view holder.
+     *
+     * @param viewHolder The View holder.
+     * @param item The Item.
+     */
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, Object item) {
         super.onBindViewHolder(viewHolder, item);
@@ -104,6 +120,11 @@ public class ChannelCardPresenter extends LongClickPresenter {
                 .into(imageView);
     }
 
+    /**
+     * On unbind view holder.
+     *
+     * @param viewHolder The View holder.
+     */
     @Override
     public void onUnbindViewHolder(ViewHolder viewHolder) {
         // Remove references to images so that the garbage collector can free up memory.
@@ -127,12 +148,31 @@ public class ChannelCardPresenter extends LongClickPresenter {
     }
 
     private final RequestListener<Drawable> mErrorListener = new RequestListener<Drawable>() {
+        /**
+         * On load failed.
+         *
+         * @param e The E.
+         * @param model The Model.
+         * @param target The Target.
+         * @param isFirstResource The Is first resource.
+         * @return True if on load failed, false otherwise.
+         */
         @Override
         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
             Log.e(TAG, "Glide load failed: " + e);
             return false;
         }
 
+        /**
+         * On resource ready.
+         *
+         * @param resource The Resource.
+         * @param model The Model.
+         * @param target The Target.
+         * @param dataSource The Data source.
+         * @param isFirstResource The Is first resource.
+         * @return True if on resource ready, false otherwise.
+         */
         @Override
         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
             return false;

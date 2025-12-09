@@ -3,13 +3,28 @@ package com.liskovsoft.smartyoutubetv2.tv.adapter;
 import com.liskovsoft.smartyoutubetv2.common.app.models.data.VideoGroup;
 import com.liskovsoft.smartyoutubetv2.tv.presenter.VideoCardPresenter;
 
+/**
+ * The Deferred video group object adapter class.
+ *
+ */
 public class DeferredVideoGroupObjectAdapter extends VideoGroupObjectAdapter {
     private long mPrevAppendTimeMs;
 
+    /**
+     * Deferred video group object adapter.
+     *
+     * @param group The Group.
+     * @param presenter The Presenter.
+     */
     public DeferredVideoGroupObjectAdapter(VideoGroup group, VideoCardPresenter presenter) {
         super(group, presenter);
     }
 
+    /**
+     * Add.
+     *
+     * @param group The Group.
+     */
     @Override
     public void add(VideoGroup group) {
         long currentTimeMillis = System.currentTimeMillis();

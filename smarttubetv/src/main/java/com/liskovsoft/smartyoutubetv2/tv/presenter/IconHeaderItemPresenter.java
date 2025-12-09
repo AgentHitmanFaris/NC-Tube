@@ -24,6 +24,10 @@ import com.liskovsoft.sharedutils.mylogger.Log;
 import com.liskovsoft.smartyoutubetv2.tv.R;
 import com.liskovsoft.smartyoutubetv2.tv.util.ViewUtil;
 
+/**
+ * The Icon header item presenter class.
+ *
+ */
 public class IconHeaderItemPresenter extends RowHeaderPresenter {
     private static final String TAG = IconHeaderItemPresenter.class.getSimpleName();
     private float mUnselectedAlpha;
@@ -31,11 +35,23 @@ public class IconHeaderItemPresenter extends RowHeaderPresenter {
     private final String mIconUrl;
     private Drawable mDefaultIcon;
 
+    /**
+     * Icon header item presenter.
+     *
+     * @param resId The Res id.
+     * @param iconUrl The Icon url.
+     */
     public IconHeaderItemPresenter(int resId, String iconUrl) {
         mResId = resId;
         mIconUrl = iconUrl;
     }
 
+    /**
+     * On create view holder.
+     *
+     * @param viewGroup The View group.
+     * @return The View holder.
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup) {
         mUnselectedAlpha = viewGroup.getResources()
@@ -50,6 +66,12 @@ public class IconHeaderItemPresenter extends RowHeaderPresenter {
         return new ViewHolder(view);
     }
 
+    /**
+     * On bind view holder.
+     *
+     * @param viewHolder The View holder.
+     * @param item The Item.
+     */
     @Override
     public void onBindViewHolder(Presenter.ViewHolder viewHolder, Object item) {
         HeaderItem headerItem;
@@ -85,6 +107,11 @@ public class IconHeaderItemPresenter extends RowHeaderPresenter {
         }
     }
 
+    /**
+     * On unbind view holder.
+     *
+     * @param viewHolder The View holder.
+     */
     @Override
     public void onUnbindViewHolder(Presenter.ViewHolder viewHolder) {
         // NOP
@@ -99,12 +126,31 @@ public class IconHeaderItemPresenter extends RowHeaderPresenter {
     }
 
     private final RequestListener<Drawable> mErrorListener = new RequestListener<Drawable>() {
+        /**
+         * On load failed.
+         *
+         * @param e The E.
+         * @param model The Model.
+         * @param target The Target.
+         * @param isFirstResource The Is first resource.
+         * @return True if on load failed, false otherwise.
+         */
         @Override
         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
             Log.e(TAG, "Glide load failed: " + e);
             return false;
         }
 
+        /**
+         * On resource ready.
+         *
+         * @param resource The Resource.
+         * @param model The Model.
+         * @param target The Target.
+         * @param dataSource The Data source.
+         * @param isFirstResource The Is first resource.
+         * @return True if on resource ready, false otherwise.
+         */
         @Override
         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
             return false;

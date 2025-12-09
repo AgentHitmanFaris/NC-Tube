@@ -42,6 +42,10 @@ import net.gotev.speech.SpeechUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Channel header presenter class.
+ *
+ */
 public class ChannelHeaderPresenter extends RowPresenter {
     private static final String TAG = ChannelHeaderPresenter.class.getSimpleName();
     private static final String EXTRA_LEANBACK_BADGE_PRESENT = "LEANBACK_BADGE_PRESENT";
@@ -54,6 +58,10 @@ public class ChannelHeaderPresenter extends RowPresenter {
     private int mStatus;
     private String mTitle;
 
+    /**
+     * The Channel header provider interface.
+     *
+     */
     public interface ChannelHeaderProvider {
         boolean onSearchChange(String newQuery);
         boolean onSearchSubmit(String query);
@@ -61,22 +69,47 @@ public class ChannelHeaderPresenter extends RowPresenter {
         String getChannelTitle();
     }
 
+    /**
+     * The Channel header callback class.
+     *
+     */
     public static class ChannelHeaderCallback extends Row implements ChannelHeaderProvider {
+        /**
+         * On search change.
+         *
+         * @param newQuery The New query.
+         * @return True if on search change, false otherwise.
+         */
         @Override
         public boolean onSearchChange(String newQuery) {
             return false;
         }
 
+        /**
+         * On search submit.
+         *
+         * @param query The Query.
+         * @return True if on search submit, false otherwise.
+         */
         @Override
         public boolean onSearchSubmit(String query) {
             return false;
         }
 
+        /**
+         * On search settings clicked.
+         *
+         */
         @Override
         public void onSearchSettingsClicked() {
 
         }
 
+        /**
+         * Gets Channel title.
+         *
+         * @return The string value.
+         */
         @Override
         public String getChannelTitle() {
             return null;
@@ -176,6 +209,11 @@ public class ChannelHeaderPresenter extends RowPresenter {
                 break;
         }
         searchBar.setSearchBarListener(new SearchBar.SearchBarListener() {
+            /**
+             * On search query change.
+             *
+             * @param query The Query.
+             */
             @Override
             public void onSearchQueryChange(String query) {
                 if (BuildConfig.DEBUG) Log.v(TAG, String.format("onSearchQueryChange %s %s", query,
@@ -185,12 +223,22 @@ public class ChannelHeaderPresenter extends RowPresenter {
                 }
             }
 
+            /**
+             * On search query submit.
+             *
+             * @param query The Query.
+             */
             @Override
             public void onSearchQuerySubmit(String query) {
                 if (BuildConfig.DEBUG) Log.v(TAG, String.format("onSearchQuerySubmit %s", query));
                 submitQuery(provider, query);
             }
 
+            /**
+             * On keyboard dismiss.
+             *
+             * @param query The Query.
+             */
             @Override
             public void onKeyboardDismiss(String query) {
                 if (BuildConfig.DEBUG) Log.v(TAG, String.format("onKeyboardDismiss %s", query));
@@ -199,16 +247,37 @@ public class ChannelHeaderPresenter extends RowPresenter {
             }
         });
         searchTextEditor.addTextChangedListener(new TextWatcher() {
+            /**
+             * Before text changed.
+             *
+             * @param s The S.
+             * @param start The Start.
+             * @param count The Count.
+             * @param after The After.
+             */
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // NOP
             }
 
+            /**
+             * On text changed.
+             *
+             * @param s The S.
+             * @param start The Start.
+             * @param before The Before.
+             * @param count The Count.
+             */
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // NOP
             }
 
+            /**
+             * After text changed.
+             *
+             * @param s The S.
+             */
             @Override
             public void afterTextChanged(Editable s) {
                 //Utils.enableScreensaver(getActivity(), true);
@@ -231,12 +300,23 @@ public class ChannelHeaderPresenter extends RowPresenter {
         private final ChannelHeaderProvider mProvider;
         private final SearchBar mSearchBar;
 
+        /**
+         * Recognizer intent callback.
+         *
+         * @param context The application context.
+         * @param provider The Provider.
+         * @param searchBar The Search bar.
+         */
         public RecognizerIntentCallback(Context context, ChannelHeaderProvider provider, SearchBar searchBar) {
             mContext = context;
             mProvider = provider;
             mSearchBar = searchBar;
         }
 
+        /**
+         * Recognize speech.
+         *
+         */
         @Override
         public void recognizeSpeech() {
             if (PermissionHelpers.hasMicPermissions(mContext)) {
@@ -278,6 +358,14 @@ public class ChannelHeaderPresenter extends RowPresenter {
         private final SearchBar mSearchBar;
         private final SpeechOrbView mSpeechOrbView;
 
+        /**
+         * Gotev callback.
+         *
+         * @param context The application context.
+         * @param provider The Provider.
+         * @param searchBar The Search bar.
+         * @param speechOrbView The Speech orb view.
+         */
         public GotevCallback(Context context, ChannelHeaderProvider provider, SearchBar searchBar, SpeechOrbView speechOrbView) {
             mContext = context;
             mProvider = provider;
@@ -285,23 +373,41 @@ public class ChannelHeaderPresenter extends RowPresenter {
             mSpeechOrbView = speechOrbView;
         }
 
+        /**
+         * Recognize speech.
+         *
+         */
         @Override
         public void recognizeSpeech() {
             try {
                 // you must have android.permission.RECORD_AUDIO granted at this point
                 PermissionHelpers.verifyMicPermissions(mContext);
                 Speech.getInstance().startListening(new SpeechDelegate() {
+                    /**
+                     * On start of speech.
+                     *
+                     */
                     @Override
                     public void onStartOfSpeech() {
                         com.liskovsoft.sharedutils.mylogger.Log.i(TAG, "speech recognition is now active");
                         showListening(mSpeechOrbView);
                     }
 
+                    /**
+                     * On speech rms changed.
+                     *
+                     * @param value The Value.
+                     */
                     @Override
                     public void onSpeechRmsChanged(float value) {
                         com.liskovsoft.sharedutils.mylogger.Log.d(TAG, "rms is now: " + value);
                     }
 
+                    /**
+                     * On speech partial results.
+                     *
+                     * @param results The Results.
+                     */
                     @Override
                     public void onSpeechPartialResults(List<String> results) {
                         StringBuilder str = new StringBuilder();
@@ -316,6 +422,11 @@ public class ChannelHeaderPresenter extends RowPresenter {
                         showNotListening(mSpeechOrbView);
                     }
 
+                    /**
+                     * On speech result.
+                     *
+                     * @param result The Result.
+                     */
                     @Override
                     public void onSpeechResult(String result) {
                         com.liskovsoft.sharedutils.mylogger.Log.i(TAG, "result: " + result);
@@ -370,7 +481,7 @@ public class ChannelHeaderPresenter extends RowPresenter {
         if (query == null) {
             return;
         }
-        
+
         if (null != provider) {
             provider.onSearchSubmit(query);
         }

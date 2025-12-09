@@ -20,6 +20,10 @@ import com.liskovsoft.smartyoutubetv2.tv.R;
 import com.liskovsoft.smartyoutubetv2.common.misc.MotherActivity;
 import com.liskovsoft.smartyoutubetv2.tv.ui.playback.PlaybackActivity;
 
+/**
+ * The App dialog activity class.
+ *
+ */
 public class AppDialogActivity extends MotherActivity {
     private static final String TAG = AppDialogActivity.class.getSimpleName();
     private AppDialogFragment mFragment;
@@ -54,6 +58,12 @@ public class AppDialogActivity extends MotherActivity {
         }
     }
 
+    /**
+     * Dispatch key event.
+     *
+     * @param event The Event.
+     * @return True if dispatch key event, false otherwise.
+     */
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         //if (KeyHelpers.isConfirmKey(event.getKeyCode()) && !event.isLongPress()) {
@@ -96,6 +106,10 @@ public class AppDialogActivity extends MotherActivity {
         return false;
     }
 
+    /**
+     * Finish.
+     *
+     */
     @Override
     public void finish() {
         // NOTE: Fragment's onDestroy/onDestroyView are not reliable way to catch dialog finish

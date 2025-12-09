@@ -4,7 +4,17 @@ import android.content.Context;
 import android.widget.Toast;
 import com.liskovsoft.smartyoutubetv2.tv.R;
 
+/**
+ * The Toast factory class.
+ *
+ */
 public class ToastFactory {
+    /**
+     * Create wifi error toast.
+     *
+     * @param context The application context.
+     * @return The Toast.
+     */
     public static Toast createWifiErrorToast(Context context) {
         return Toast.makeText(
                 context,

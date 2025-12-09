@@ -27,6 +27,10 @@ import com.liskovsoft.smartyoutubetv2.tv.adapter.VideoGroupObjectAdapter;
 import com.liskovsoft.smartyoutubetv2.tv.ui.widgets.marqueetextview.MarqueeTextView;
 import com.liskovsoft.smartyoutubetv2.tv.ui.widgets.speedmarquee.SpeedMarquee;
 
+/**
+ * The View util class.
+ *
+ */
 public class ViewUtil {
     /**
      * Focused card zoom factor
@@ -65,6 +69,11 @@ public class ViewUtil {
         return false;
     }
 
+    /**
+     * Disable marquee.
+     *
+     * @param textViews The Text views.
+     */
     public static void disableMarquee(TextView... textViews) {
         if (VERSION.SDK_INT <= 19 || textViews == null || textViews.length == 0) { // Android 4: Broken grid layout fix
             return;
@@ -101,6 +110,12 @@ public class ViewUtil {
         }
     }
 
+    /**
+     * Apply marquee rtl params.
+     *
+     * @param textView The Text view.
+     * @param scroll The Scroll.
+     */
     public static void applyMarqueeRtlParams(TextView textView, boolean scroll) {
         //if (VERSION.SDK_INT <= 17) {
         //    return;
@@ -131,6 +146,12 @@ public class ViewUtil {
         }
     }
 
+    /**
+     * Sets Text scroll speed.
+     *
+     * @param textView The Text view.
+     * @param speed The Speed.
+     */
     public static void setTextScrollSpeed(TextView textView, float speed) {
         if (VERSION.SDK_INT <= 19) { // Android 4: Broken grid layout fix
             return;
@@ -143,12 +164,25 @@ public class ViewUtil {
         }
     }
 
+    /**
+     * Enable view.
+     *
+     * @param view The view instance.
+     * @param enabled The Enabled.
+     */
     public static void enableView(View view, boolean enabled) {
         if (view != null) {
             view.setVisibility(enabled ? View.VISIBLE : View.GONE);
         }
     }
 
+    /**
+     * Sets Dimensions.
+     *
+     * @param view The view instance.
+     * @param width The Width.
+     * @param height The Height.
+     */
     public static void setDimensions(View view, int width, int height) {
         if (view != null) {
             ViewGroup.LayoutParams lp = view.getLayoutParams();
@@ -165,6 +199,12 @@ public class ViewUtil {
         }
     }
 
+    /**
+     * Checks if List row empty.
+     *
+     * @param obj The Obj.
+     * @return True if is list row empty, false otherwise.
+     */
     public static boolean isListRowEmpty(Object obj) {
         if (obj instanceof ListRow) {
             ListRow row = (ListRow) obj;
@@ -175,12 +215,23 @@ public class ViewUtil {
         return true;
     }
 
+    /**
+     * Glide options.
+     *
+     * @return The Request options.
+     */
     public static RequestOptions glideOptions() {
         return new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.NONE) // ensure start animation from beginning
                 .skipMemoryCache(true); // ensure start animation from beginning
     }
 
+    /**
+     * Enable transparent dialog.
+     *
+     * @param context The application context.
+     * @param rootView The Root view.
+     */
     public static void enableTransparentDialog(Context context, View rootView) {
         if (context == null || rootView == null || VERSION.SDK_INT <= 19) {
             return;
@@ -215,6 +266,12 @@ public class ViewUtil {
         }
     }
 
+    /**
+     * Enable left dialog.
+     *
+     * @param context The application context.
+     * @param rootView The Root view.
+     */
     public static void enableLeftDialog(Context context, View rootView) {
         if (context == null || rootView == null || VERSION.SDK_INT <= 19) {
             return;
@@ -228,6 +285,11 @@ public class ViewUtil {
         }
     }
 
+    /**
+     * Make monochrome.
+     *
+     * @param iconView The Icon view.
+     */
     public static void makeMonochrome(ImageView iconView) {
         ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.setSaturation(0);
@@ -235,6 +297,12 @@ public class ViewUtil {
         iconView.setColorFilter(filter);
     }
 
+    /**
+     * Sets Gravity.
+     *
+     * @param frameLayout The Frame layout.
+     * @param gravity The Gravity.
+     */
     public static void setGravity(FrameLayout frameLayout, int gravity) {
         if (frameLayout == null) {
             return;

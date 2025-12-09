@@ -16,6 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The Pagination adapter class.
+ *
+ */
 public abstract class PaginationAdapter extends ArrayObjectAdapter {
     public static final String KEY_TAG = "tag";
     public static final String KEY_ANCHOR = "anchor";
@@ -32,6 +36,13 @@ public abstract class PaginationAdapter extends ArrayObjectAdapter {
     private int mLoadingIndicatorPosition;
 
 
+    /**
+     * Pagination adapter.
+     *
+     * @param context The application context.
+     * @param presenter The Presenter.
+     * @param tag The Tag.
+     */
     public PaginationAdapter(Context context, Presenter presenter, String tag) {
         mContext = context;
         mPresenter = presenter;
@@ -43,16 +54,36 @@ public abstract class PaginationAdapter extends ArrayObjectAdapter {
         setPresenterSelector();
     }
 
+    /**
+     * Sets Tag.
+     *
+     * @param tag The Tag.
+     */
     public void setTag(String tag) {
         mRowTag = tag;
     }
 
+    /**
+     * Sets Next page.
+     *
+     * @param page The Page.
+     */
     public void setNextPage(int page) {
         mNextPage = page;
     }
 
+    /**
+     * Sets Presenter selector.
+     *
+     */
     public void setPresenterSelector() {
         setPresenterSelector(new PresenterSelector() {
+            /**
+             * Gets Presenter.
+             *
+             * @param item The Item.
+             * @return The Presenter.
+             */
             @Override
             public Presenter getPresenter(Object item) {
                 if (item instanceof LoadingCardView) {
@@ -65,16 +96,34 @@ public abstract class PaginationAdapter extends ArrayObjectAdapter {
         });
     }
 
+    /**
+     * Gets Items.
+     *
+     * @return A list of Get items.
+     */
     public List<Object> getItems() {
         return unmodifiableList();
     }
 
+    /**
+     * Should show loading indicator.
+     *
+     * @return True if should show loading indicator, false otherwise.
+     */
     public boolean shouldShowLoadingIndicator() {
         return mLoadingIndicatorPosition == -1;
     }
 
+    /**
+     * Show loading indicator.
+     *
+     */
     public void showLoadingIndicator() {
         new Handler().post(new Runnable() {
+            /**
+             * Run.
+             *
+             */
             @Override
             public void run() {
                 mLoadingIndicatorPosition = size();
@@ -84,16 +133,30 @@ public abstract class PaginationAdapter extends ArrayObjectAdapter {
         });
     }
 
+    /**
+     * Remove loading indicator.
+     *
+     */
     public void removeLoadingIndicator() {
         removeItems(mLoadingIndicatorPosition, 1);
         notifyItemRangeRemoved(mLoadingIndicatorPosition, 1);
         mLoadingIndicatorPosition = -1;
     }
 
+    /**
+     * Sets Anchor.
+     *
+     * @param anchor The Anchor.
+     */
     public void setAnchor(String anchor) {
         mAnchor = anchor;
     }
 
+    /**
+     * Add posts.
+     *
+     * @param posts The Posts.
+     */
     public void addPosts(List<?> posts) {
         if (posts == null) {
             return;
@@ -106,10 +169,20 @@ public abstract class PaginationAdapter extends ArrayObjectAdapter {
         }
     }
 
+    /**
+     * Should load next page.
+     *
+     * @return True if should load next page, false otherwise.
+     */
     public boolean shouldLoadNextPage() {
         return shouldShowLoadingIndicator() && mNextPage != 0;
     }
 
+    /**
+     * Gets Adapter options.
+     *
+     * @return The Map< string,  string>.
+     */
     public Map<String, String> getAdapterOptions() {
         Map<String, String> map = new HashMap<>();
         map.put(KEY_TAG, mRowTag);
@@ -118,6 +191,10 @@ public abstract class PaginationAdapter extends ArrayObjectAdapter {
         return map;
     }
 
+    /**
+     * Show reload card.
+     *
+     */
     public void showReloadCard() {
         Option option = new Option(
                 mContext.getString(R.string.title_no_videos),
@@ -126,6 +203,10 @@ public abstract class PaginationAdapter extends ArrayObjectAdapter {
         add(option);
     }
 
+    /**
+     * Show try again card.
+     *
+     */
     public void showTryAgainCard() {
         Option option = new Option(
                 mContext.getString(R.string.title_oops),
@@ -134,6 +215,10 @@ public abstract class PaginationAdapter extends ArrayObjectAdapter {
         add(option);
     }
 
+    /**
+     * Remove reload card.
+     *
+     */
     public void removeReloadCard() {
         if (isRefreshCardDisplayed()) {
             removeItems(0, 1);
@@ -141,6 +226,11 @@ public abstract class PaginationAdapter extends ArrayObjectAdapter {
         }
     }
 
+    /**
+     * Checks if Refresh card displayed.
+     *
+     * @return True if is refresh card displayed, false otherwise.
+     */
     public boolean isRefreshCardDisplayed() {
         Object item = get(size() - 1);
         if (item instanceof Option) {
@@ -153,8 +243,18 @@ public abstract class PaginationAdapter extends ArrayObjectAdapter {
         return false;
     }
 
+    /**
+     * Add all items.
+     *
+     * @param items The Items.
+     */
     public abstract void addAllItems(List<?> items);
 
+    /**
+     * Gets All items.
+     *
+     * @return A list of Get all items.
+     */
     public abstract List<?> getAllItems();
 
 

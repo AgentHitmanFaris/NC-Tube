@@ -5,10 +5,19 @@ import android.view.KeyEvent;
 import com.liskovsoft.smartyoutubetv2.tv.R;
 import com.liskovsoft.smartyoutubetv2.tv.ui.common.LeanbackActivity;
 
+/**
+ * The Search tags activity class.
+ *
+ */
 public class SearchTagsActivity extends LeanbackActivity {
     private SearchTagsFragment mFragment;
     private boolean mDownPressed;
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +26,13 @@ public class SearchTagsActivity extends LeanbackActivity {
                 .findFragmentById(R.id.search_tags_fragment);
     }
 
+    /**
+     * On key down.
+     *
+     * @param keyCode The Key code.
+     * @param event The Event.
+     * @return True if on key down, false otherwise.
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // If there are no results found, press the left key to reselect the microphone
@@ -26,6 +42,10 @@ public class SearchTagsActivity extends LeanbackActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    /**
+     * Finish really.
+     *
+     */
     @Override
     public void finishReally() {
         super.finishReally();

@@ -7,12 +7,21 @@ import com.liskovsoft.smartyoutubetv2.common.app.presenters.PlaybackPresenter;
 import com.liskovsoft.smartyoutubetv2.common.app.views.PlaybackView;
 import com.liskovsoft.smartyoutubetv2.common.utils.Utils;
 
+/**
+ * The Long press handler class.
+ *
+ */
 public class LongPressHandler {
     // Long press handler
     private long mKeyTimeMs;
     private int mKeyCode;
     private int mKeyRepeatTimes;
 
+    /**
+     * Update long press handler.
+     *
+     * @param event The Event.
+     */
     public void updateLongPressHandler(KeyEvent event) {
         int keyCode = event.getKeyCode();
         long currentTimeMs = System.currentTimeMillis();

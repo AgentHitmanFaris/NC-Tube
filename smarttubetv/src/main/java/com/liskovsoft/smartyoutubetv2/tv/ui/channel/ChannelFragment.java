@@ -15,6 +15,10 @@ import com.liskovsoft.smartyoutubetv2.tv.ui.browse.video.MultipleRowsFragment;
 import com.liskovsoft.smartyoutubetv2.tv.ui.mod.leanback.misc.ProgressBarManager;
 import com.liskovsoft.googlecommon.common.helpers.YouTubeHelper;
 
+/**
+ * The Channel fragment class.
+ *
+ */
 public class ChannelFragment extends MultipleRowsFragment implements ChannelView {
     private static final String TAG = ChannelFragment.class.getSimpleName();
     private static final String SELECTED_ITEM_INDEX = "SelectedItemIndex";
@@ -23,10 +27,15 @@ public class ChannelFragment extends MultipleRowsFragment implements ChannelView
     private boolean mIsFragmentCreated;
     private int mRestoredItemIndex = -1;
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(null); // Real restore takes place in the presenter
-        
+
         mRestoredItemIndex = savedInstanceState != null ? savedInstanceState.getInt(SELECTED_ITEM_INDEX, -1) : -1;
         mIsFragmentCreated = true;
         mChannelPresenter = ChannelPresenter.instance(getContext());
@@ -35,16 +44,31 @@ public class ChannelFragment extends MultipleRowsFragment implements ChannelView
         mProgressBarManager = new ProgressBarManager();
         if (MainUIData.instance(getContext()).isChannelSearchBarEnabled()) {
             addHeader(new ChannelHeaderCallback() {
+                /**
+                 * On search settings clicked.
+                 *
+                 */
                 @Override
                 public void onSearchSettingsClicked() {
                     mChannelPresenter.onSearchSettingsClicked();
                 }
 
+                /**
+                 * On search submit.
+                 *
+                 * @param query The Query.
+                 * @return True if on search submit, false otherwise.
+                 */
                 @Override
                 public boolean onSearchSubmit(String query) {
                     return mChannelPresenter.onSearchSubmit(query);
                 }
 
+                /**
+                 * Gets Channel title.
+                 *
+                 * @return The string value.
+                 */
                 @Override
                 public String getChannelTitle() {
                     if (mChannelPresenter.getChannel() == null) {
@@ -61,6 +85,11 @@ public class ChannelFragment extends MultipleRowsFragment implements ChannelView
         }
     }
 
+    /**
+     * On save instance state.
+     *
+     * @param outState The Out state.
+     */
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -69,6 +98,11 @@ public class ChannelFragment extends MultipleRowsFragment implements ChannelView
         outState.putInt(SELECTED_ITEM_INDEX, getPosition());
     }
 
+    /**
+     * On activity created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -88,16 +122,28 @@ public class ChannelFragment extends MultipleRowsFragment implements ChannelView
         return ChannelPresenter.instance(getContext());
     }
 
+    /**
+     * On destroy.
+     *
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
         mChannelPresenter.onViewDestroyed();
     }
 
+    /**
+     * On finish.
+     *
+     */
     public void onFinish() {
         mChannelPresenter.onFinish();
     }
 
+    /**
+     * On resume.
+     *
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -109,6 +155,11 @@ public class ChannelFragment extends MultipleRowsFragment implements ChannelView
         mIsFragmentCreated = false;
     }
 
+    /**
+     * Show progress bar.
+     *
+     * @param show The Show.
+     */
     @Override
     public void showProgressBar(boolean show) {
         if (show) {

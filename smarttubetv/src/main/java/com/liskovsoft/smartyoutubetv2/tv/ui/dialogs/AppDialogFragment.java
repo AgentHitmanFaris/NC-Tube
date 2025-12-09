@@ -36,6 +36,10 @@ import com.liskovsoft.smartyoutubetv2.tv.util.ViewUtil;
 
 import java.util.List;
 
+/**
+ * The App dialog fragment class.
+ *
+ */
 public class AppDialogFragment extends LeanbackSettingsFragment implements AppDialogView {
     private static final String TAG = AppDialogFragment.class.getSimpleName();
     private AppDialogPresenter mPresenter;
@@ -48,6 +52,11 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
     private static final String PREFERENCE_FRAGMENT_TAG =
             "androidx.leanback.preference.LeanbackSettingsFragment.PREFERENCE_FRAGMENT";
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +66,10 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
         mManager = new AppPreferenceManager(getActivity());
     }
 
+    /**
+     * On pause.
+     *
+     */
     @Override
     public void onPause() {
         super.onPause();
@@ -65,6 +78,10 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
         mIsPaused = true;
     }
 
+    /**
+     * On resume.
+     *
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -73,6 +90,10 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
         mIsPaused = false;
     }
 
+    /**
+     * On destroy.
+     *
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -82,6 +103,10 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
         }
     }
 
+    /**
+     * On preference start initial screen.
+     *
+     */
     @Override
     public void onPreferenceStartInitialScreen() {
         // FIX: Can not perform this action after onSaveInstanceState
@@ -101,12 +126,26 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
         }
     }
 
+    /**
+     * On preference start fragment.
+     *
+     * @param preferenceFragment The Preference fragment.
+     * @param preference The Preference.
+     * @return True if on preference start fragment, false otherwise.
+     */
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment preferenceFragment, Preference preference) {
         // Contains only child fragments.
         return false;
     }
 
+    /**
+     * On preference start screen.
+     *
+     * @param preferenceFragment The Preference fragment.
+     * @param preferenceScreen The Preference screen.
+     * @return True if on preference start screen, false otherwise.
+     */
     @Override
     public boolean onPreferenceStartScreen(PreferenceFragment preferenceFragment, PreferenceScreen preferenceScreen) {
         // Contains only child fragments.
@@ -121,6 +160,16 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
         return fragment;
     }
 
+    /**
+     * Show.
+     *
+     * @param categories The Categories.
+     * @param title The Title.
+     * @param isExpandable The Is expandable.
+     * @param isTransparent The Is transparent.
+     * @param isOverlay The Is overlay.
+     * @param id The Id.
+     */
     @Override
     public void show(List<OptionCategory> categories, String title, boolean isExpandable, boolean isTransparent, boolean isOverlay, int id) {
         if (!Utils.checkActivity(getActivity())) {
@@ -144,6 +193,13 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
         }
     }
 
+    /**
+     * On preference display dialog.
+     *
+     * @param caller The Caller.
+     * @param pref The Pref.
+     * @return True if on preference display dialog, false otherwise.
+     */
     @Override
     public boolean onPreferenceDisplayDialog(@Nullable PreferenceFragment caller, @NonNull Preference pref) {
         // Fix: IllegalStateException: Activity has been destroyed
@@ -237,6 +293,10 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
         transaction.commitAllowingStateLoss();
     }
 
+    /**
+     * Finish.
+     *
+     */
     @Override
     public void finish() {
         if (getActivity() != null) {
@@ -244,6 +304,10 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
         }
     }
 
+    /**
+     * Go back.
+     *
+     */
     @Override
     public void goBack() {
         if (getChildFragmentManager() != null && getChildFragmentManager().getBackStackEntryCount() > 0) {
@@ -253,41 +317,78 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
         }
     }
 
+    /**
+     * Clear backstack.
+     *
+     */
     @Override
     public void clearBackstack() {
         // this manager holds entire back stack
         Helpers.setField(this, "mChildFragmentManager", null);
     }
 
+    /**
+     * Checks if Shown.
+     *
+     * @return True if is shown, false otherwise.
+     */
     @Override
     public boolean isShown() {
         return isVisible() && getUserVisibleHint();
     }
 
+    /**
+     * Checks if Transparent.
+     *
+     * @return True if is transparent, false otherwise.
+     */
     @Override
     public boolean isTransparent() {
         return mIsTransparent;
     }
 
+    /**
+     * Checks if Overlay.
+     *
+     * @return True if is overlay, false otherwise.
+     */
     @Override
     public boolean isOverlay() {
         return mIsOverlay;
     }
 
+    /**
+     * Checks if Paused.
+     *
+     * @return True if is paused, false otherwise.
+     */
     @Override
     public boolean isPaused() {
         return mIsPaused;
     }
 
+    /**
+     * Gets View id.
+     *
+     * @return The ID value.
+     */
     @Override
     public int getViewId() {
         return mId;
     }
 
+    /**
+     * On finish.
+     *
+     */
     public void onFinish() {
         mPresenter.onFinish();
     }
     
+    /**
+     * The App preference fragment class.
+     *
+     */
     public static class AppPreferenceFragment extends LeanbackPreferenceFragment {
         private static final String TAG = AppPreferenceFragment.class.getSimpleName();
         private List<OptionCategory> mCategories;
@@ -296,6 +397,12 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
         private String mTitle;
         private boolean mIsTransparent;
 
+        /**
+         * On create preferences.
+         *
+         * @param bundle The Bundle.
+         * @param s The S.
+         */
         @Override
         public void onCreatePreferences(Bundle bundle, String s) {
             // Note, place in field with different name to avoid field overlapping
@@ -308,6 +415,14 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
             Log.d(TAG, "onCreatePreferences");
         }
 
+        /**
+         * On create view.
+         *
+         * @param inflater The Inflater.
+         * @param container The Container.
+         * @param savedInstanceState The saved instance state bundle.
+         * @return The View.
+         */
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View view = super.onCreateView(inflater, container, savedInstanceState);
@@ -341,24 +456,50 @@ public class AppDialogFragment extends LeanbackSettingsFragment implements AppDi
             }
         }
 
+        /**
+         * On display preference dialog.
+         *
+         * @param preference The Preference.
+         */
         @Override
         public void onDisplayPreferenceDialog(Preference preference) {
             super.onDisplayPreferenceDialog(preference);
         }
 
+        /**
+         * On preference tree click.
+         *
+         * @param preference The Preference.
+         * @return True if on preference tree click, false otherwise.
+         */
         @Override
         public boolean onPreferenceTreeClick(Preference preference) {
             return super.onPreferenceTreeClick(preference);
         }
 
+        /**
+         * Sets Categories.
+         *
+         * @param categories The Categories.
+         */
         public void setCategories(List<OptionCategory> categories) {
             mCategories = categories;
         }
 
+        /**
+         * Sets Title.
+         *
+         * @param title The Title.
+         */
         public void setTitle(String title) {
             mTitle = title;
         }
 
+        /**
+         * Enable transparent.
+         *
+         * @param enable The Enable.
+         */
         public void enableTransparent(boolean enable) {
             mIsTransparent = enable;
         }

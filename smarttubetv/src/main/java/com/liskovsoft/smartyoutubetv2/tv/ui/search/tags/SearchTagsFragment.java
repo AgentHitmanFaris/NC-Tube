@@ -30,6 +30,10 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The Search tags fragment class.
+ *
+ */
 public class SearchTagsFragment extends SearchTagsFragmentBase {
     private static final String TAG = SearchTagsFragment.class.getSimpleName();
     private SearchPresenter mSearchPresenter;
@@ -41,6 +45,11 @@ public class SearchTagsFragment extends SearchTagsFragmentBase {
     private SearchData mSearchData;
     private boolean mIsFragmentCreated;
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(null); // Real restore takes place in the presenter
@@ -66,6 +75,11 @@ public class SearchTagsFragment extends SearchTagsFragmentBase {
         setSearchTagsLongPressListener(listener);
     }
 
+    /**
+     * On activity created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -73,12 +87,20 @@ public class SearchTagsFragment extends SearchTagsFragmentBase {
         mSearchPresenter.onViewInitialized();
     }
 
+    /**
+     * On destroy.
+     *
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
         mSearchPresenter.onViewDestroyed();
     }
 
+    /**
+     * On resume.
+     *
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -90,6 +112,11 @@ public class SearchTagsFragment extends SearchTagsFragmentBase {
         mIsFragmentCreated = false;
     }
 
+    /**
+     * Update search.
+     *
+     * @param group The Group.
+     */
     @Override
     public void updateSearch(VideoGroup group) {
         if (isComputingLayout(group)) {
@@ -103,6 +130,10 @@ public class SearchTagsFragment extends SearchTagsFragmentBase {
         freeze(false);
     }
 
+    /**
+     * Clear search.
+     *
+     */
     @Override
     public void clearSearch() {
         mSearchQuery = null;
@@ -134,31 +165,60 @@ public class SearchTagsFragment extends SearchTagsFragmentBase {
         }
     }
 
+    /**
+     * Clear search tags.
+     *
+     */
     @Override
     public void clearSearchTags() {
         clearTags();
     }
 
+    /**
+     * Sets Tags provider.
+     *
+     * @param provider The Provider.
+     */
     @Override
     public void setTagsProvider(MediaServiceSearchTagProvider provider) {
         setSearchTagsProvider(provider);
     }
 
+    /**
+     * Start search.
+     *
+     * @param searchText The Search text.
+     */
     @Override
     public void startSearch(String searchText) {
         startSearch(searchText, false);
     }
 
+    /**
+     * Gets Search text.
+     *
+     * @return The string value.
+     */
     @Override
     public String getSearchText() {
         return getSearchBarText();
     }
 
+    /**
+     * Start voice recognition.
+     *
+     */
     @Override
     public void startVoiceRecognition() {
         startSearch(null, true);
     }
 
+    /**
+     * On query text change.
+     *
+     * @param newQuery The New query.
+     * @return True if on query text change, false otherwise.
+     */
     @Override
     public boolean onQueryTextChange(String newQuery) {
         loadSearchTags(newQuery);
@@ -172,6 +232,12 @@ public class SearchTagsFragment extends SearchTagsFragmentBase {
         return true;
     }
 
+    /**
+     * On query text submit.
+     *
+     * @param query The Query.
+     * @return True if on query text submit, false otherwise.
+     */
     @Override
     public boolean onQueryTextSubmit(String query) {
         loadSearchResult(query);
@@ -234,6 +300,10 @@ public class SearchTagsFragment extends SearchTagsFragmentBase {
         super.submitQuery(query);
     }
 
+    /**
+     * On search settings clicked.
+     *
+     */
     @Override
     public void onSearchSettingsClicked() {
         mSearchPresenter.onSearchSettingsClicked();
@@ -262,7 +332,7 @@ public class SearchTagsFragment extends SearchTagsFragmentBase {
                 return adapter;
             }
         }
-        
+
         return null;
     }
 
@@ -325,7 +395,7 @@ public class SearchTagsFragment extends SearchTagsFragmentBase {
             VideoGroupObjectAdapter mediaGroupAdapter = new VideoGroupObjectAdapter(group, group.isShorts() ? mShortsPresenter : mCardPresenter);
 
             mSearchGroupAdapters.put(mediaGroupId, mediaGroupAdapter);
-            
+
             attachAdapter(getResultsAdapter().size(), rowHeader, mediaGroupAdapter);
         } else {
             Log.d(TAG, "Continue row %s %s", group.getTitle(), System.currentTimeMillis());
@@ -399,10 +469,18 @@ public class SearchTagsFragment extends SearchTagsFragmentBase {
         return false;
     }
 
+    /**
+     * On finish.
+     *
+     */
     public void onFinish() {
         mSearchPresenter.onFinish();
     }
 
+    /**
+     * Finish really.
+     *
+     */
     @Override
     public void finishReally() {
         LeanbackActivity activity = (LeanbackActivity) getActivity();
@@ -413,6 +491,12 @@ public class SearchTagsFragment extends SearchTagsFragmentBase {
     }
 
     private final class ItemViewLongPressedListener implements OnItemLongPressedListener {
+        /**
+         * On item long pressed.
+         *
+         * @param itemViewHolder The Item view holder.
+         * @param item The Item.
+         */
         @Override
         public void onItemLongPressed(Presenter.ViewHolder itemViewHolder, Object item) {
             if (item instanceof Video) {
