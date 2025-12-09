@@ -13,32 +13,69 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * The Header video group object adapter class.
+ *
+ */
 public class HeaderVideoGroupObjectAdapter extends VideoGroupObjectAdapter {
     private Object mHeader;
     private List<Video> mAllItems;
     private List<VideoGroup> mAllGroups; // keep away from garbage collector
 
+    /**
+     * Header video group object adapter.
+     *
+     * @param videoGroup The Video group.
+     * @param presenter The Presenter.
+     */
     public HeaderVideoGroupObjectAdapter(VideoGroup videoGroup, Presenter presenter) {
         super(videoGroup, presenter);
     }
 
+    /**
+     * Header video group object adapter.
+     *
+     * @param videoGroup The Video group.
+     * @param presenter The Presenter.
+     */
     public HeaderVideoGroupObjectAdapter(VideoGroup videoGroup, PresenterSelector presenter) {
         super(videoGroup, presenter);
     }
 
+    /**
+     * Header video group object adapter.
+     *
+     * @param presenter The Presenter.
+     */
     public HeaderVideoGroupObjectAdapter(Presenter presenter) {
         super(presenter);
     }
 
+    /**
+     * Header video group object adapter.
+     *
+     * @param presenter The Presenter.
+     */
     public HeaderVideoGroupObjectAdapter(PresenterSelector presenter) {
         super(presenter);
     }
 
+    /**
+     * Size.
+     *
+     * @return The integer value.
+     */
     @Override
     public int size() {
         return super.size() + (mHeader != null ? 1 : 0);
     }
 
+    /**
+     * Gets .
+     *
+     * @param index The Index.
+     * @return The Object.
+     */
     @Override
     public Object get(int index) {
         if (index == 0 && mHeader != null) {
@@ -48,18 +85,34 @@ public class HeaderVideoGroupObjectAdapter extends VideoGroupObjectAdapter {
         return super.get(mHeader != null ? index - 1 : index);
     }
 
+    /**
+     * Index of.
+     *
+     * @param item The Item.
+     * @return The integer value.
+     */
     @Override
     public int indexOf(Video item) {
         int index = super.indexOf(item);
         return mHeader != null && index != -1 ? index + 1 : index;
     }
 
+    /**
+     * Index of alt.
+     *
+     * @param item The Item.
+     * @return The integer value.
+     */
     @Override
     public int indexOfAlt(Video item) {
         int index = super.indexOfAlt(item);
         return mHeader != null && index != -1 ? index + 1 : index;
     }
 
+    /**
+     * Clear.
+     *
+     */
     @Override
     public void clear() {
         super.clear();
@@ -68,6 +121,11 @@ public class HeaderVideoGroupObjectAdapter extends VideoGroupObjectAdapter {
         mAllGroups = null;
     }
 
+    /**
+     * Sets Header.
+     *
+     * @param header The Header.
+     */
     public void setHeader(Object header) {
         if (header == null && mHeader != null) {
             notifyItemRangeRemoved(0, 1);
@@ -76,10 +134,20 @@ public class HeaderVideoGroupObjectAdapter extends VideoGroupObjectAdapter {
         mHeader = header;
     }
 
+    /**
+     * Gets Header.
+     *
+     * @return The Object.
+     */
     public Object getHeader() {
         return mHeader;
     }
 
+    /**
+     * Filter.
+     *
+     * @param text The Text.
+     */
     public void filter(String text) {
         if (mAllItems == null) {
             mAllItems = new ArrayList<>(getAll());
@@ -116,6 +184,12 @@ public class HeaderVideoGroupObjectAdapter extends VideoGroupObjectAdapter {
         add(result);
     }
 
+    /**
+     * Notify item range changed.
+     *
+     * @param positionStart The Position start.
+     * @param itemCount The Item count.
+     */
     @Override
     public void notifyItemRangeChanged(int positionStart, int itemCount) {
         super.notifyItemRangeChanged(mHeader != null ? positionStart + 1 : positionStart, itemCount);

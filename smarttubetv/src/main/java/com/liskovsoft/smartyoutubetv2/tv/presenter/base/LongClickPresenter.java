@@ -5,10 +5,19 @@ import androidx.leanback.widget.Presenter;
 import com.liskovsoft.sharedutils.helpers.KeyHelpers;
 import com.liskovsoft.smartyoutubetv2.common.prefs.GeneralData;
 
+/**
+ * The Long click presenter class.
+ *
+ */
 public abstract class LongClickPresenter extends Presenter {
     private OnItemLongPressedListener mLongPressedListener;
     private Boolean mLongPressDisabled;
 
+    /**
+     * Sets On item view long pressed listener.
+     *
+     * @param listener The On item long pressed listener listener.
+     */
     public void setOnItemViewLongPressedListener(OnItemLongPressedListener listener) {
         mLongPressedListener = listener;
     }
@@ -45,6 +54,11 @@ public abstract class LongClickPresenter extends Presenter {
         });
     }
 
+    /**
+     * On unbind view holder.
+     *
+     * @param viewHolder The View holder.
+     */
     @Override
     public void onUnbindViewHolder(ViewHolder viewHolder) {
         if (mLongPressedListener != null) {

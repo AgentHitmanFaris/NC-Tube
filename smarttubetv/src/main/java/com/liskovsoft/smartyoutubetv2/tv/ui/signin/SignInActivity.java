@@ -4,7 +4,16 @@ import android.os.Bundle;
 import androidx.leanback.app.GuidedStepSupportFragment;
 import com.liskovsoft.smartyoutubetv2.tv.ui.common.LeanbackActivity;
 
+/**
+ * The Sign in activity class.
+ *
+ */
 public class SignInActivity extends LeanbackActivity {
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -14,6 +23,10 @@ public class SignInActivity extends LeanbackActivity {
         }
     }
 
+    /**
+     * Finish.
+     *
+     */
     @Override
     public void finish() {
         super.finish();

@@ -20,16 +20,32 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The App preference manager class.
+ *
+ */
 public class AppPreferenceManager {
     private final Context mContext;
     private final Runnable mOnChange;
 
+    /**
+     * The List preference data class.
+     *
+     */
     public static class ListPreferenceData {
         public final CharSequence[] entries;
         public final CharSequence[] values;
         public final String defaultValue;
         public final Set<String> defaultValues;
 
+        /**
+         * List preference data.
+         *
+         * @param entries The Entries.
+         * @param values The Values.
+         * @param defaultValue The Default value.
+         * @param defaultValues The Default values.
+         */
         public ListPreferenceData(CharSequence[] entries, CharSequence[] values, String defaultValue, Set<String> defaultValues) {
             this.entries = entries;
             this.values = values;
@@ -38,15 +54,32 @@ public class AppPreferenceManager {
         }
     }
 
+    /**
+     * App preference manager.
+     *
+     * @param context The application context.
+     */
     public AppPreferenceManager(Context context) {
         this(context, null);
     }
 
+    /**
+     * App preference manager.
+     *
+     * @param context The application context.
+     * @param onChange The On change.
+     */
     public AppPreferenceManager(Context context, Runnable onChange) {
         mContext = context;
         mOnChange = onChange;
     }
 
+    /**
+     * Create preference.
+     *
+     * @param category The Category.
+     * @return The Preference.
+     */
     public Preference createPreference(OptionCategory category) {
         switch (category.type) {
             case OptionCategory.TYPE_CHECKBOX_LIST:
@@ -110,6 +143,12 @@ public class AppPreferenceManager {
         return pref;
     }
 
+    /**
+     * Create button preference.
+     *
+     * @param category The Category.
+     * @return The Preference.
+     */
     public Preference createButtonPreference(OptionCategory category) {
         Preference result = null;
 
@@ -129,6 +168,12 @@ public class AppPreferenceManager {
         return result;
     }
 
+    /**
+     * Create switch preference.
+     *
+     * @param category The Category.
+     * @return The Preference.
+     */
     public Preference createSwitchPreference(OptionCategory category) {
         Preference result = null;
 
@@ -149,6 +194,12 @@ public class AppPreferenceManager {
         return result;
     }
 
+    /**
+     * Create radio list preference.
+     *
+     * @param category The Category.
+     * @return The Preference.
+     */
     public Preference createRadioListPreference(OptionCategory category) {
         ListPreference pref = new ListPreference(mContext);
 
@@ -157,6 +208,12 @@ public class AppPreferenceManager {
         return pref;
     }
 
+    /**
+     * Create checked list preference.
+     *
+     * @param category The Category.
+     * @return The Preference.
+     */
     public Preference createCheckedListPreference(OptionCategory category) {
         MultiSelectListPreference pref = new MultiSelectListPreference(mContext);
 
@@ -243,6 +300,12 @@ public class AppPreferenceManager {
         });
     }
 
+    /**
+     * Create list preference data.
+     *
+     * @param items The Items.
+     * @return A list of Create list preference data.
+     */
     public ListPreferenceData createListPreferenceData(List<OptionItem> items) {
         CharSequence[] titles = new CharSequence[items.size()];
         CharSequence[] hashes = new CharSequence[items.size()];

@@ -44,6 +44,12 @@ public class VideoCardPresenter extends LongClickPresenter {
     private int mWidth;
     private int mHeight;
 
+    /**
+     * On create view holder.
+     *
+     * @param parent The Parent.
+     * @return The View holder.
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent) {
         Context context = parent.getContext();
@@ -68,6 +74,11 @@ public class VideoCardPresenter extends LongClickPresenter {
         updateDimensions(context);
 
         ComplexImageCardView cardView = new ComplexImageCardView(context) {
+            /**
+             * Sets Selected.
+             *
+             * @param selected The Selected.
+             */
             @Override
             public void setSelected(boolean selected) {
                 updateCardBackgroundColor(this, selected);
@@ -110,6 +121,12 @@ public class VideoCardPresenter extends LongClickPresenter {
         }
     }
 
+    /**
+     * On bind view holder.
+     *
+     * @param viewHolder The View holder.
+     * @param item The Item.
+     */
     @Override
     public void onBindViewHolder(Presenter.ViewHolder viewHolder, Object item) {
         super.onBindViewHolder(viewHolder, item);
@@ -167,6 +184,11 @@ public class VideoCardPresenter extends LongClickPresenter {
                 .into(cardView.getMainImageView());
     }
 
+    /**
+     * On unbind view holder.
+     *
+     * @param viewHolder The View holder.
+     */
     @Override
     public void onUnbindViewHolder(Presenter.ViewHolder viewHolder) {
         super.onUnbindViewHolder(viewHolder);
@@ -229,12 +251,31 @@ public class VideoCardPresenter extends LongClickPresenter {
     }
 
     private final RequestListener<Drawable> mErrorListener = new RequestListener<Drawable>() {
+        /**
+         * On load failed.
+         *
+         * @param e The E.
+         * @param model The Model.
+         * @param target The Target.
+         * @param isFirstResource The Is first resource.
+         * @return True if on load failed, false otherwise.
+         */
         @Override
         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
             Log.e(TAG, "Glide load failed: " + e);
             return false;
         }
 
+        /**
+         * On resource ready.
+         *
+         * @param resource The Resource.
+         * @param model The Model.
+         * @param target The Target.
+         * @param dataSource The Data source.
+         * @param isFirstResource The Is first resource.
+         * @return True if on resource ready, false otherwise.
+         */
         @Override
         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
             return false;
@@ -242,12 +283,31 @@ public class VideoCardPresenter extends LongClickPresenter {
     };
 
     private final RequestListener<Bitmap> mErrorListener2 = new RequestListener<Bitmap>() {
+        /**
+         * On load failed.
+         *
+         * @param e The E.
+         * @param model The Model.
+         * @param target The Target.
+         * @param isFirstResource The Is first resource.
+         * @return True if on load failed, false otherwise.
+         */
         @Override
         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
             Log.e(TAG, "Glide load failed: " + e);
             return false;
         }
 
+        /**
+         * On resource ready.
+         *
+         * @param resource The Resource.
+         * @param model The Model.
+         * @param target The Target.
+         * @param dataSource The Data source.
+         * @param isFirstResource The Is first resource.
+         * @return True if on resource ready, false otherwise.
+         */
         @Override
         public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
             return false;

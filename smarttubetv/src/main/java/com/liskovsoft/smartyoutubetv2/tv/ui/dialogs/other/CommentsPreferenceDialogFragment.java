@@ -26,6 +26,10 @@ import com.stfalcon.chatkit.messages.MessagesListAdapter;
 
 import java.util.List;
 
+/**
+ * The Comments preference dialog fragment class.
+ *
+ */
 public class CommentsPreferenceDialogFragment extends LeanbackPreferenceDialogFragment {
     private static final String SENDER_ID = CommentsPreferenceDialogFragment.class.getSimpleName();
     private boolean mIsTransparent;
@@ -36,6 +40,13 @@ public class CommentsPreferenceDialogFragment extends LeanbackPreferenceDialogFr
     private ChatItemMessage mFocusedMessage;
 
     private static class CommentsBackup implements Backup {
+        /**
+         * Comments backup.
+         *
+         * @param backupMessages The Backup messages.
+         * @param focusedMessage The Focused message.
+         * @param currentGroup The Current group.
+         */
         public CommentsBackup(List<ChatItemMessage> backupMessages, ChatItemMessage focusedMessage, CommentGroup currentGroup) {
             this.backupMessages = backupMessages;
             this.focusedMessage = focusedMessage;
@@ -47,6 +58,13 @@ public class CommentsPreferenceDialogFragment extends LeanbackPreferenceDialogFr
         public final CommentGroup currentGroup;
     }
 
+    /**
+     * New instance.
+     *
+     * @param commentsReceiver The Comments receiver.
+     * @param key The Key.
+     * @return The Comments preference dialog fragment.
+     */
     public static CommentsPreferenceDialogFragment newInstance(CommentsReceiver commentsReceiver, String key) {
         final Bundle args = new Bundle(1);
         args.putString(ARG_KEY, key);
@@ -59,6 +77,11 @@ public class CommentsPreferenceDialogFragment extends LeanbackPreferenceDialogFr
         return fragment;
     }
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +92,14 @@ public class CommentsPreferenceDialogFragment extends LeanbackPreferenceDialogFr
         }
     }
 
+    /**
+     * On create view.
+     *
+     * @param inflater The Inflater.
+     * @param container The Container.
+     * @param savedInstanceState The saved instance state bundle.
+     * @return The View.
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,6 +133,11 @@ public class CommentsPreferenceDialogFragment extends LeanbackPreferenceDialogFr
         adapter.setLoadingMessage(mCommentsReceiver.getLoadingMessage());
 
         mCommentsReceiver.setCallback(new Callback() {
+            /**
+             * On comment group.
+             *
+             * @param commentGroup The Comment group.
+             */
             @Override
             public void onCommentGroup(CommentGroup commentGroup) {
                 if (commentGroup == null || commentGroup.getComments() == null) {
@@ -134,6 +170,11 @@ public class CommentsPreferenceDialogFragment extends LeanbackPreferenceDialogFr
                 }
             }
 
+            /**
+             * On backup.
+             *
+             * @param backup The Backup.
+             */
             @Override
             public void onBackup(Backup backup) {
                 mBackupMessages = ((CommentsBackup) backup).backupMessages;
@@ -147,6 +188,11 @@ public class CommentsPreferenceDialogFragment extends LeanbackPreferenceDialogFr
                 adapter.scrollToPosition(adapter.getMessagePosition(mFocusedMessage));
             }
 
+            /**
+             * On sync.
+             *
+             * @param commentItem The Comment item.
+             */
             @Override
             public void onSync(CommentItem commentItem) {
                 syncMessage(adapter, ChatItemMessage.from(view.getContext(), commentItem));
@@ -192,16 +238,29 @@ public class CommentsPreferenceDialogFragment extends LeanbackPreferenceDialogFr
         }
     }
 
+    /**
+     * Enable transparent.
+     *
+     * @param enable The Enable.
+     */
     public void enableTransparent(boolean enable) {
         mIsTransparent = enable;
     }
 
+    /**
+     * On destroy view.
+     *
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         backupMessages();
     }
 
+    /**
+     * On destroy.
+     *
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();

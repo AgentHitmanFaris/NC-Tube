@@ -17,12 +17,23 @@ import com.liskovsoft.smartyoutubetv2.tv.util.ViewUtil;
 import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
 
+/**
+ * The Chat preference dialog fragment class.
+ *
+ */
 public class ChatPreferenceDialogFragment extends LeanbackPreferenceDialogFragment {
     private static final String SENDER_ID = ChatPreferenceDialogFragment.class.getSimpleName();
     private boolean mIsTransparent;
     private ChatReceiver mChatReceiver;
     private CharSequence mDialogTitle;
 
+    /**
+     * New instance.
+     *
+     * @param chatReceiver The Chat receiver.
+     * @param key The Key.
+     * @return The Chat preference dialog fragment.
+     */
     public static ChatPreferenceDialogFragment newInstance(ChatReceiver chatReceiver, String key) {
         final Bundle args = new Bundle(1);
         args.putString(ARG_KEY, key);
@@ -35,6 +46,11 @@ public class ChatPreferenceDialogFragment extends LeanbackPreferenceDialogFragme
         return fragment;
     }
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +61,14 @@ public class ChatPreferenceDialogFragment extends LeanbackPreferenceDialogFragme
         }
     }
 
+    /**
+     * On create view.
+     *
+     * @param inflater The Inflater.
+     * @param container The Container.
+     * @param savedInstanceState The saved instance state bundle.
+     * @return The View.
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,6 +101,11 @@ public class ChatPreferenceDialogFragment extends LeanbackPreferenceDialogFragme
         return view;
     }
 
+    /**
+     * Enable transparent.
+     *
+     * @param enable The Enable.
+     */
     public void enableTransparent(boolean enable) {
         mIsTransparent = enable;
     }

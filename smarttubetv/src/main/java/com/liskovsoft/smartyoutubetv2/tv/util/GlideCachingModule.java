@@ -15,6 +15,12 @@ import com.bumptech.glide.module.AppGlideModule;
 public class GlideCachingModule extends AppGlideModule {
     private final static long CACHE_SIZE = 10 * 1024 * 1024; // 10 MB
 
+    /**
+     * Apply options.
+     *
+     * @param context The application context.
+     * @param builder The Builder.
+     */
     @Override
     public void applyOptions(Context context, GlideBuilder builder) {
         //if (MyApplication.from(context).isTest())

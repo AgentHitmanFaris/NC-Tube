@@ -40,6 +40,10 @@ import net.gotev.speech.SpeechUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Search tags fragment base class.
+ *
+ */
 public abstract class SearchTagsFragmentBase extends SearchSupportFragment
         implements SearchSupportFragment.SearchResultProvider, SearchView {
     private static final String TAG = SearchTagsFragmentBase.class.getSimpleName();
@@ -55,6 +59,11 @@ public abstract class SearchTagsFragmentBase extends SearchSupportFragment
     private SearchTagsProvider mSearchTagsProvider;
     private ProgressBarManager mProgressBarManager;
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +77,14 @@ public abstract class SearchTagsFragmentBase extends SearchSupportFragment
         setupListenersAndPermissions();
     }
 
+    /**
+     * On create view.
+     *
+     * @param inflater The Inflater.
+     * @param container The Container.
+     * @param savedInstanceState The saved instance state bundle.
+     * @return The View.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = super.onCreateView(inflater, container, savedInstanceState);
@@ -77,18 +94,33 @@ public abstract class SearchTagsFragmentBase extends SearchSupportFragment
         return root;
     }
 
+    /**
+     * On start.
+     *
+     */
     @Override
     public void onStart() {
         super.onStart();
         mIsStopping = false;
     }
 
+    /**
+     * On stop.
+     *
+     */
     @Override
     public void onStop() {
         super.onStop();
         mIsStopping = true;
     }
 
+    /**
+     * On activity result.
+     *
+     * @param requestCode The Request code.
+     * @param resultCode The Result code.
+     * @param data The Data.
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -105,11 +137,21 @@ public abstract class SearchTagsFragmentBase extends SearchSupportFragment
         }
     }
 
+    /**
+     * Gets Results adapter.
+     *
+     * @return The Object adapter.
+     */
     @Override
     public ObjectAdapter getResultsAdapter() {
         return mResultsAdapter;
     }
 
+    /**
+     * Show progress bar.
+     *
+     * @param show The Show.
+     */
     @Override
     public void showProgressBar(boolean show) {
         if (show) {
@@ -131,10 +173,20 @@ public abstract class SearchTagsFragmentBase extends SearchSupportFragment
         mTagsPresenter.setOnItemViewLongPressedListener(listener);
     }
 
+    /**
+     * Checks if Stopping.
+     *
+     * @return True if is stopping, false otherwise.
+     */
     public boolean isStopping() {
         return mIsStopping;
     }
 
+    /**
+     * Has results.
+     *
+     * @return True if has results, false otherwise.
+     */
     public boolean hasResults() {
         return mResultsAdapter.size() > 0;
     }
@@ -308,17 +360,31 @@ public abstract class SearchTagsFragmentBase extends SearchSupportFragment
                 // you must have android.permission.RECORD_AUDIO granted at this point
                 PermissionHelpers.verifyMicPermissions(getContext());
                 Speech.getInstance().startListening(new SpeechDelegate() {
+                    /**
+                     * On start of speech.
+                     *
+                     */
                     @Override
                     public void onStartOfSpeech() {
                         Log.i(TAG, "speech recognition is now active");
                         showListening();
                     }
 
+                    /**
+                     * On speech rms changed.
+                     *
+                     * @param value The Value.
+                     */
                     @Override
                     public void onSpeechRmsChanged(float value) {
                         Log.d(TAG, "rms is now: " + value);
                     }
 
+                    /**
+                     * On speech partial results.
+                     *
+                     * @param results The Results.
+                     */
                     @Override
                     public void onSpeechPartialResults(List<String> results) {
                         StringBuilder str = new StringBuilder();
@@ -333,6 +399,11 @@ public abstract class SearchTagsFragmentBase extends SearchSupportFragment
                         showNotListening();
                     }
 
+                    /**
+                     * On speech result.
+                     *
+                     * @param result The Result.
+                     */
                     @Override
                     public void onSpeechResult(String result) {
                         Log.i(TAG, "result: " + result);

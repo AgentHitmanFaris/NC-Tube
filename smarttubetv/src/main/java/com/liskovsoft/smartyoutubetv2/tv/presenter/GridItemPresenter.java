@@ -10,13 +10,28 @@ import androidx.fragment.app.Fragment;
 import androidx.leanback.widget.Presenter;
 import com.liskovsoft.smartyoutubetv2.tv.R;
 
+/**
+ * The Grid item presenter class.
+ *
+ */
 public class GridItemPresenter extends Presenter {
     private final Fragment mainFragment;
 
+    /**
+     * Grid item presenter.
+     *
+     * @param mainFragment The Main fragment.
+     */
     public GridItemPresenter(Fragment mainFragment) {
         this.mainFragment = mainFragment;
     }
 
+    /**
+     * On create view holder.
+     *
+     * @param parent The Parent.
+     * @return The View holder.
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent) {
         TextView view = new TextView(parent.getContext());
@@ -35,11 +50,22 @@ public class GridItemPresenter extends Presenter {
         return new ViewHolder(view);
     }
 
+    /**
+     * On bind view holder.
+     *
+     * @param viewHolder The View holder.
+     * @param item The Item.
+     */
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, Object item) {
         ((TextView) viewHolder.view).setText((String) item);
     }
 
+    /**
+     * On unbind view holder.
+     *
+     * @param viewHolder The View holder.
+     */
     @Override
     public void onUnbindViewHolder(ViewHolder viewHolder) {
     }

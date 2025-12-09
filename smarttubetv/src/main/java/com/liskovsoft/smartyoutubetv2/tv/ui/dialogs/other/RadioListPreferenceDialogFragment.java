@@ -12,14 +12,29 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.liskovsoft.smartyoutubetv2.tv.ui.mod.leanback.preference.LeanbackListPreferenceDialogFragment;
 import com.liskovsoft.smartyoutubetv2.tv.util.ViewUtil;
 
+/**
+ * The Radio list preference dialog fragment class.
+ *
+ */
 public class RadioListPreferenceDialogFragment extends LeanbackListPreferenceDialogFragment {
     private boolean mIsTransparent;
 
+    /**
+     * On create adapter.
+     *
+     * @return The Adapter< view holder>.
+     */
     @Override
     public Adapter<ViewHolder> onCreateAdapter() {
         return new AdapterRadio(mEntries, mEntryValues, mInitialSelection);
     }
 
+    /**
+     * New instance single.
+     *
+     * @param key The Key.
+     * @return A list of New instance single.
+     */
     public static RadioListPreferenceDialogFragment newInstanceSingle(String key) {
         final Bundle args = new Bundle(1);
         args.putString(ARG_KEY, key);
@@ -53,6 +68,11 @@ public class RadioListPreferenceDialogFragment extends LeanbackListPreferenceDia
         return view;
     }
 
+    /**
+     * Enable transparent.
+     *
+     * @param enable The Enable.
+     */
     public void enableTransparent(boolean enable) {
         mIsTransparent = enable;
     }
@@ -75,10 +95,22 @@ public class RadioListPreferenceDialogFragment extends LeanbackListPreferenceDia
      * MOD: Don't exit from dialog after selection has been set
      */
     public class AdapterRadio extends AdapterSingle {
+        /**
+         * Adapter radio.
+         *
+         * @param entries The Entries.
+         * @param entryValues The Entry values.
+         * @param selectedValue The Selected value.
+         */
         public AdapterRadio(CharSequence[] entries, CharSequence[] entryValues, CharSequence selectedValue) {
             super(entries, entryValues, selectedValue);
         }
 
+        /**
+         * On item click.
+         *
+         * @param viewHolder The View holder.
+         */
         @Override
         public void onItemClick(ViewHolder viewHolder) {
             final int index = viewHolder.getAdapterPosition();

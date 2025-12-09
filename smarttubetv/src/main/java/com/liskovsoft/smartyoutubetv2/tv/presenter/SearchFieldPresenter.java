@@ -18,23 +18,47 @@ import com.liskovsoft.smartyoutubetv2.tv.R;
 import com.liskovsoft.smartyoutubetv2.tv.ui.browse.video.GridFragmentHelper;
 import com.liskovsoft.smartyoutubetv2.tv.util.ViewUtil;
 
+/**
+ * The Search field presenter class.
+ *
+ */
 public class SearchFieldPresenter extends Presenter {
     private static final String TAG = SearchFieldPresenter.class.getSimpleName();
     private int mWidth;
     private int mHeight;
 
+    /**
+     * The Search field callback class.
+     *
+     */
     public static class SearchFieldCallback {
         private String mText;
 
+        /**
+         * On text changed.
+         *
+         * @param text The Text.
+         */
         public void onTextChanged(String text) {
             mText = text;
         }
 
+        /**
+         * Gets Text.
+         *
+         * @return The string value.
+         */
         public String getText() {
             return mText;
         }
     }
 
+    /**
+     * On create view holder.
+     *
+     * @param parent The Parent.
+     * @return The View holder.
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent) {
         updateDimensions(parent.getContext());
@@ -59,6 +83,12 @@ public class SearchFieldPresenter extends Presenter {
         return new ViewHolder(contentView);
     }
 
+    /**
+     * On bind view holder.
+     *
+     * @param viewHolder The View holder.
+     * @param item The Item.
+     */
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, Object item) {
         SearchFieldCallback callback = (SearchFieldCallback) item;
@@ -68,16 +98,37 @@ public class SearchFieldPresenter extends Presenter {
         }
         editField.setText(callback.getText());
         TextWatcher watcher = new TextWatcher() {
+            /**
+             * Before text changed.
+             *
+             * @param s The S.
+             * @param start The Start.
+             * @param count The Count.
+             * @param after The After.
+             */
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
+            /**
+             * On text changed.
+             *
+             * @param s The S.
+             * @param start The Start.
+             * @param before The Before.
+             * @param count The Count.
+             */
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
 
+            /**
+             * After text changed.
+             *
+             * @param s The S.
+             */
             @Override
             public void afterTextChanged(Editable s) {
                 callback.onTextChanged(s.toString());
@@ -87,6 +138,11 @@ public class SearchFieldPresenter extends Presenter {
         editField.setTag(watcher);
     }
 
+    /**
+     * On unbind view holder.
+     *
+     * @param viewHolder The View holder.
+     */
     @Override
     public void onUnbindViewHolder(ViewHolder viewHolder) {
 

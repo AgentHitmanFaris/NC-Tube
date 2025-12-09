@@ -13,10 +13,19 @@ import com.liskovsoft.smartyoutubetv2.tv.R;
 
 import java.util.List;
 
+/**
+ * The Add device fragment class.
+ *
+ */
 public class AddDeviceFragment extends GuidedStepSupportFragment implements AddDeviceView {
     private static final int CONTINUE = 2;
     private AddDevicePresenter mAddDevicePresenter;
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +34,11 @@ public class AddDeviceFragment extends GuidedStepSupportFragment implements AddD
         mAddDevicePresenter.setView(this);
     }
 
+    /**
+     * On activity created.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -32,12 +46,21 @@ public class AddDeviceFragment extends GuidedStepSupportFragment implements AddD
         mAddDevicePresenter.onViewInitialized();
     }
 
+    /**
+     * On destroy.
+     *
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
         mAddDevicePresenter.onViewDestroyed();
     }
 
+    /**
+     * Show code.
+     *
+     * @param userCode The User code.
+     */
     @Override
     public void showCode(String userCode) {
         setTitle(userCode);
@@ -47,11 +70,21 @@ public class AddDeviceFragment extends GuidedStepSupportFragment implements AddD
         getGuidanceStylist().getTitleView().setText(userCode);
     }
 
+    /**
+     * Close.
+     *
+     */
     @Override
     public void close() {
         getActivity().finish();
     }
 
+    /**
+     * On create guidance.
+     *
+     * @param savedInstanceState The saved instance state bundle.
+     * @return The Guidance stylist. guidance.
+     */
     @Override
     @NonNull
     public GuidanceStylist.Guidance onCreateGuidance(@NonNull Bundle savedInstanceState) {
@@ -60,6 +93,12 @@ public class AddDeviceFragment extends GuidedStepSupportFragment implements AddD
         return new GuidanceStylist.Guidance(title, description, "", null);
     }
 
+    /**
+     * On create actions.
+     *
+     * @param actions The Actions.
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @Override
     public void onCreateActions(@NonNull List<GuidedAction> actions, Bundle savedInstanceState) {
         GuidedAction login = new GuidedAction.Builder()
@@ -69,6 +108,11 @@ public class AddDeviceFragment extends GuidedStepSupportFragment implements AddD
         actions.add(login);
     }
 
+    /**
+     * On guided action clicked.
+     *
+     * @param action The Action.
+     */
     @Override
     public void onGuidedActionClicked(GuidedAction action) {
         if (action.getId() == CONTINUE) {

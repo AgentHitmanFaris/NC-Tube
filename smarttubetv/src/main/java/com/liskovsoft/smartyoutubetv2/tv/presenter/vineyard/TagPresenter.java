@@ -10,12 +10,22 @@ import com.liskovsoft.smartyoutubetv2.common.app.models.search.vineyard.User;
 import com.liskovsoft.smartyoutubetv2.tv.presenter.base.LongClickPresenter;
 import com.liskovsoft.smartyoutubetv2.tv.ui.widgets.vineyard.TagCardView;
 
+/**
+ * The Tag presenter class.
+ *
+ */
 public class TagPresenter extends LongClickPresenter {
     private static int sDefaultBackgroundColor;
     private static int sDefaultTextColor;
     private static int sSelectedBackgroundColor;
     private static int sSelectedTextColor;
 
+    /**
+     * On create view holder.
+     *
+     * @param parent The Parent.
+     * @return The View holder.
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent) {
         sDefaultBackgroundColor =
@@ -28,6 +38,11 @@ public class TagPresenter extends LongClickPresenter {
                 ContextCompat.getColor(parent.getContext(), R.color.card_selected_text_grey);
 
         TagCardView cardView = new TagCardView(parent.getContext()) {
+            /**
+             * Sets Selected.
+             *
+             * @param selected The Selected.
+             */
             @Override
             public void setSelected(boolean selected) {
                 updateCardBackgroundColor(this, selected);
@@ -51,6 +66,12 @@ public class TagPresenter extends LongClickPresenter {
         view.setTextColor(selected ? sSelectedTextColor : sDefaultTextColor);
     }
 
+    /**
+     * On bind view holder.
+     *
+     * @param viewHolder The View holder.
+     * @param item The Item.
+     */
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, Object item) {
         super.onBindViewHolder(viewHolder, item);
@@ -74,6 +95,11 @@ public class TagPresenter extends LongClickPresenter {
         }
     }
 
+    /**
+     * On unbind view holder.
+     *
+     * @param viewHolder The View holder.
+     */
     @Override
     public void onUnbindViewHolder(ViewHolder viewHolder) {
 

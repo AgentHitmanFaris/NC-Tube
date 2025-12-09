@@ -13,9 +13,19 @@ import com.liskovsoft.smartyoutubetv2.tv.util.ViewUtil;
 
 import java.util.Set;
 
+/**
+ * The String list preference dialog fragment class.
+ *
+ */
 public class StringListPreferenceDialogFragment extends LeanbackListPreferenceDialogFragment {
     private boolean mIsTransparent;
 
+    /**
+     * New instance string list.
+     *
+     * @param key The Key.
+     * @return A list of New instance string list.
+     */
     public static StringListPreferenceDialogFragment newInstanceStringList(String key) {
         final Bundle args = new Bundle(1);
         args.putString(ARG_KEY, key);
@@ -27,11 +37,24 @@ public class StringListPreferenceDialogFragment extends LeanbackListPreferenceDi
         return fragment;
     }
 
+    /**
+     * On create adapter.
+     *
+     * @return The Adapter< view holder>.
+     */
     @Override
     public Adapter<ViewHolder> onCreateAdapter() {
         return new AdapterMultiStrings(mEntries, mEntryValues, mInitialSelections);
     }
 
+    /**
+     * On create view.
+     *
+     * @param inflater The Inflater.
+     * @param container The Container.
+     * @param savedInstanceState The saved instance state bundle.
+     * @return The View.
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,15 +67,38 @@ public class StringListPreferenceDialogFragment extends LeanbackListPreferenceDi
         return view;
     }
 
+    /**
+     * Enable transparent.
+     *
+     * @param enable The Enable.
+     */
     public void enableTransparent(boolean enable) {
         mIsTransparent = enable;
     }
 
+    /**
+     * The Adapter multi strings class.
+     *
+     */
     public class AdapterMultiStrings extends AdapterMulti {
+        /**
+         * Adapter multi strings.
+         *
+         * @param entries The Entries.
+         * @param entryValues The Entry values.
+         * @param initialSelections The Initial selections.
+         */
         public AdapterMultiStrings(CharSequence[] entries, CharSequence[] entryValues, Set<String> initialSelections) {
             super(entries, entryValues, initialSelections);
         }
 
+        /**
+         * On create view holder.
+         *
+         * @param parent The Parent.
+         * @param viewType The View type.
+         * @return The View holder.
+         */
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -62,6 +108,12 @@ public class StringListPreferenceDialogFragment extends LeanbackListPreferenceDi
             return new ViewHolder(view, this);
         }
 
+        /**
+         * On bind view holder.
+         *
+         * @param holder The Holder.
+         * @param position The Position.
+         */
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             holder.getWidgetView().setChecked(

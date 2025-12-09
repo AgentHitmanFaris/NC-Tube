@@ -20,6 +20,10 @@ import androidx.leanback.widget.AbstractDetailsDescriptionPresenter;
 
 import com.liskovsoft.smartyoutubetv2.common.app.models.data.Video;
 
+/**
+ * The Details description presenter class.
+ *
+ */
 public class DetailsDescriptionPresenter extends AbstractDetailsDescriptionPresenter {
 
     @Override

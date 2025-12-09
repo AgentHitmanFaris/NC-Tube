@@ -6,14 +6,28 @@ import android.view.ViewGroup;
 import androidx.leanback.widget.VerticalGridPresenter;
 import com.liskovsoft.smartyoutubetv2.tv.util.ViewUtil;
 
+/**
+ * The Custom vertical grid presenter class.
+ *
+ */
 public class CustomVerticalGridPresenter extends VerticalGridPresenter {
     private final int mLayoutResId;
     private final int mRootResId;
 
+    /**
+     * Custom vertical grid presenter.
+     *
+     */
     public CustomVerticalGridPresenter() {
         this(-1, -1);
     }
 
+    /**
+     * Custom vertical grid presenter.
+     *
+     * @param layoutResId The Layout res id.
+     * @param rootResId The Root res id.
+     */
     public CustomVerticalGridPresenter(int layoutResId, int rootResId) {
         super(ViewUtil.FOCUS_ZOOM_FACTOR, ViewUtil.FOCUS_DIMMER_ENABLED);
 

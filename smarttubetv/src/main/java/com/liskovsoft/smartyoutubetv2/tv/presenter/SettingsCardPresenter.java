@@ -14,12 +14,22 @@ import com.liskovsoft.smartyoutubetv2.common.prefs.MainUIData;
 import com.liskovsoft.smartyoutubetv2.tv.R;
 import com.liskovsoft.smartyoutubetv2.tv.util.ViewUtil;
 
+/**
+ * The Settings card presenter class.
+ *
+ */
 public class SettingsCardPresenter extends Presenter {
     private int mDefaultBackgroundColor;
     private int mDefaultTextColor;
     private int mSelectedBackgroundColor;
     private int mSelectedTextColor;
 
+    /**
+     * On create view holder.
+     *
+     * @param parent The Parent.
+     * @return The View holder.
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent) {
         Context context = parent.getContext();
@@ -58,6 +68,12 @@ public class SettingsCardPresenter extends Presenter {
         return new ViewHolder(container);
     }
 
+    /**
+     * On bind view holder.
+     *
+     * @param viewHolder The View holder.
+     * @param item The Item.
+     */
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, Object item) {
         SettingsItem settingsItem = (SettingsItem) item;
@@ -74,6 +90,11 @@ public class SettingsCardPresenter extends Presenter {
         }
     }
 
+    /**
+     * On unbind view holder.
+     *
+     * @param viewHolder The View holder.
+     */
     @Override
     public void onUnbindViewHolder(ViewHolder viewHolder) {
     }
